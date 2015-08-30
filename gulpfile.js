@@ -14,7 +14,8 @@ var gulp       = require('gulp'),
     imagemin   = require('gulp-imagemin'),
     pngquant   = require('imagemin-pngquant'),
     path       = require('path'),
-    jsonminify = require('gulp-jsonminify');
+    jsonminify = require('gulp-jsonminify'),
+    zip        = require('gulp-zip');
 
 gulp.task('css', function () {
   gulp.src('./sass/**/*.scss')
@@ -78,8 +79,14 @@ gulp.task('images', function() {
     .pipe(gulp.dest('./dist/images/')); 
 });
 
+gulp.task('zip', function () {
+    return gulp.src('dist/*')
+        .pipe(zip('package.zip'))
+        .pipe(gulp.dest('./dist/'));
+});
+
 gulp.task('build', ['copy', 'css', 'js', 'html', 'images']);
-gulp.task('package', ['build']);
+gulp.task('package', ['build', 'zip']);
 gulp.task('default', ['build']);
 
 gulp.task('watch', function () {
