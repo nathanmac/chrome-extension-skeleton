@@ -80,9 +80,9 @@ gulp.task('images', function() {
 });
 
 gulp.task('zip', function () {
-    return gulp.src('dist/*')
+    return gulp.src('dist/**/*')
         .pipe(zip('package.zip'))
-        .pipe(gulp.dest('./dist/'));
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('build', ['copy', 'css', 'js', 'html', 'images']);
